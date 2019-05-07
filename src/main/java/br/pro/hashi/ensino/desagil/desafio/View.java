@@ -2,6 +2,7 @@ package br.pro.hashi.ensino.desagil.desafio;
 
 import br.pro.hashi.ensino.desagil.desafio.model.Board;
 import br.pro.hashi.ensino.desagil.desafio.model.Element;
+import br.pro.hashi.ensino.desagil.desafio.model.HumanPlayer;
 import br.pro.hashi.ensino.desagil.desafio.model.Model;
 
 import javax.swing.*;
@@ -42,6 +43,7 @@ public class View extends JPanel {
         // Define o tamanho da componente a partir do
         // tamanho do tabuleiro e da constante acima.
         setPreferredSize(new Dimension(width, height));
+
     }
 
 
@@ -70,6 +72,16 @@ public class View extends JPanel {
             int col = element.getCol();
 
             g.drawImage(image, col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE, this);
+
+            if(model.getHumanPlayer().getCol() == model.getTarget().getCol() && model.getHumanPlayer().getRow() == model.getTarget().getRow()){
+                g.drawString("O jogador venceu!",50,70);
+                model.setWinner(model.getHumanPlayer());
+            }
+            if(model.getCpuPlayer().getCol() == model.getTarget().getCol() && model.getCpuPlayer().getRow() == model.getTarget().getRow()){
+                g.drawString("O CPU venceu!",50,70);
+                model.setWinner(model.getCpuPlayer());
+            }
+
         });
 
         // Linha necessária para evitar atrasos
